@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+Name=sysadmln/webscreen
+
+docker build -t "$Name" .
+docker push sysadmln/webscreen:latest
