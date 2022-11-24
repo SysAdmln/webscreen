@@ -3,22 +3,32 @@ MAINTAINER sys@dmin.pro
 
 WORKDIR /tmp
 
+ADD requirements.txt /tmp/
 RUN sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     curl -LO https://chromedriver.storage.googleapis.com/107.0.5304.62/chromedriver_linux64.zip && \
-    apt update && \
-    apt install -y unzip google-chrome-stable && \
+    mkdir -p /tmp/screenshot && \
+    apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+    unzip google-chrome-stable \
+    fonts-freefont-ttf fonts-freefont-ttf && \
     unzip chromedriver_linux64.zip && \
     mv chromedriver /usr/local/bin/ && \
-    /usr/local/bin/python -m pip install --upgrade pip
+    pip3 install -r requirements.txt && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    apt-get autoclean -y && \
+    rm -rf \
+        /var/lib/apt/lists/* \
+        /var/cache/debconf/*-old \
+        /var/lib/dpkg/*-old/ \
+        /usr/share/man/* \
+        /usr/share/doc/**/*.gz \
+        /usr/share/locale/ \
 
 ENV LANG=ru_RU.UTF-8
 ENV LANGUAGE="ru_RU:en_US"
 
-ADD requirements.txt /tmp/
-RUN pip install -r requirements.txt
-
-RUN mkdir -p /tmp/screenshot
 WORKDIR /tmp/screenshot
 ADD screenshot.py /tmp/
 
