@@ -1,4 +1,4 @@
-A Docker container that receives a screenshot of an entire web page. Based on Chrome 107.0.5304.62
+A Docker container that receives a screenshot of an entire web page. Based on Chrome 109.0.5414.74
 
 How To Use
 =========

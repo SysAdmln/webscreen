@@ -6,25 +6,25 @@ WORKDIR /tmp
 ADD requirements.txt /tmp/
 RUN sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    curl -LO https://chromedriver.storage.googleapis.com/107.0.5304.62/chromedriver_linux64.zip && \
+    curl -LO https://chromedriver.storage.googleapis.com/109.0.5414.74/chromedriver_linux64.zip && \
     mkdir -p /tmp/screenshot && \
-    apt-get update -qq && \
-    apt-get install -y --no-install-recommends \
+    apt update -qq && \
+    apt install -y --no-install-recommends \
     unzip google-chrome-stable \
     fonts-freefont-ttf fonts-freefont-ttf && \
     unzip chromedriver_linux64.zip && \
     mv chromedriver /usr/local/bin/ && \
     pip3 install -r requirements.txt && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    apt-get autoclean -y && \
+    apt autoremove -y && \
+    apt clean && \
+    apt autoclean -y && \
     rm -rf \
         /var/lib/apt/lists/* \
         /var/cache/debconf/*-old \
         /var/lib/dpkg/*-old/ \
         /usr/share/man/* \
         /usr/share/doc/**/*.gz \
-        /usr/share/locale/ \
+        /usr/share/locale/
 
 ENV LANG=ru_RU.UTF-8
 ENV LANGUAGE="ru_RU:en_US"
