@@ -32,5 +32,5 @@ ENV LANGUAGE="ru_RU:en_US"
 WORKDIR /tmp/screenshot
 ADD screenshot.py /tmp/
 
-#ENTRYPOINT ["python", "/tmp/screenshot.py"]
-#CMD ["--help"]
+ENTRYPOINT ["python", "/tmp/screenshot.py"]
+CMD ["--help"]
