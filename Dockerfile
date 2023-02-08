@@ -6,7 +6,7 @@ WORKDIR /tmp
 ADD requirements.txt /tmp/
 RUN sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    curl -LO https://chromedriver.storage.googleapis.com/109.0.5414.74/chromedriver_linux64.zip && \
+    curl -LO https://chromedriver.storage.googleapis.com/110.0.5481.77/chromedriver_linux64.zip && \
     mkdir -p /tmp/screenshot && \
     apt update -qq && \
     apt install -y --no-install-recommends \
@@ -32,5 +32,5 @@ ENV LANGUAGE="ru_RU:en_US"
 WORKDIR /tmp/screenshot
 ADD screenshot.py /tmp/
 
-ENTRYPOINT ["python", "/tmp/screenshot.py"]
-CMD ["--help"]
+#ENTRYPOINT ["python", "/tmp/screenshot.py"]
+#CMD ["--help"]
